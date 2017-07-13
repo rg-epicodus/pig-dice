@@ -14,23 +14,31 @@
     <div class="container-fluid">
       <div class="row">
         <div class="container-fluid col-lg-3">
+
           <div class="well" id="selectPlayers">
-            <form class="form-group">
+            <form class="form-group" id="GAME_START">
               <h2>Enter number of players</h2>
-              <select name="players">
+              <select name="players" id="Players">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
+              <br>
+              <br>
+              <input name="name" class="form-group" placeholder="Player 1 Name"><br>
+              <input name="name" class="form-group" placeholder="Player 2 Name">
             </form>
           </div>
           <div id="rollOptions">
             <div class="col-lg-3 col-md-3 col-sm-3" id="tester">
-              <button type="button" id="#ROLL" class="btn">Roll Again</button>
-              <button type="button" id="#HOLD" class="btn">Hold Score</button>
+              <button type="button" id="ROLL" class="btn">Roll Again</button>
+              <button type="button" id="HOLD" class="btn">Hold Score</button>
             </div>
           </div>
+          <div><span id="ROLL"></span></div>
+          <div><span id="HOLD"></span></div>
+          <div><span id="WINNING"></span></div>
         </div>
         <button type="submit" name="button" class="btn">Begin Game</button>
       </div>

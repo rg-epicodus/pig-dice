@@ -1,33 +1,33 @@
 // #result
-new controller(numOfPlayers) {
-  var winScore = 60;
-  var turn     = 0;
-  var players  = new array [numOfPlayers];
-  var offset   = Math.ceiling(Math.random()*players.length);
-  var won      = false;
-  var dice     = 0;
-  var selector = offset;
+function Controller(numOfPlayers) {
+  this.winScore = 60;
+  this.turn     = 0;
+  this.players  = new Array [numOfPlayers];
+  this.offset   = Math.ceiling(Math.random()*players.length);
+  this.won      = false;
+  this.dice     = 0;
+  this.selector = 0;
 }
-controller.prototype.setPlayers() {
+Controller.prototype.setPlayers = function () {
   for (i=0;i<this.players.length;i++) {
-    this.players[i] = "USER_"(i+1).toString();
+    this.players[i] = "USER_" + (i+1).toString();
 }
-controller.prototype.setWin(maxScore) {
+Controller.prototype.setWin = function (maxScore) {
   this.winScore = maxScore;
 }
-controller.prototype.diceRoll() {
+Controller.prototype.diceRoll = function () {
   return Math.ceiling(Math.random()*6);
 }
-controller.prototype.testPlayer(user) {
-  if (user.scoreSum => this.winScore) {
+Controller.prototype.testPlayer = function (user) {
+  if (user.scoreSum >= this.winScore) {
     this.won = true;
   }
 }
 
-new player(playerName) {
-  var name  = playerName.toString();
-  var scoreSum = 0;
-  var scoreCur = 0;
+function Player(playerName) {
+  this.name  = playerName.toString();
+  this.scoreSum = 0;
+  this.scoreCur = 0;
   //var strike = false;
 }
 
@@ -35,24 +35,25 @@ $(document).ready(function(){
   //players start game
   //players enter names and alt winScore
   //computer rolls for starting player
+  console.log('test');
   $("form#GAME_START").submit(function(event){
-    var gameController = new controller (parseInt($("input#Players")));
+    var gameController = new Controller (parseInt($("input#Players")));
     gameController.setPlayers();
 
     event.preventDefault();
+    console.log("test");
   });
 
   //control function
-  $("#ROLL").onClick(function(){
+  $("#ROLL").click(function(){
     controller.dice = controller.diceRoll();
     if (controller.dice != 1) {
       controller.players[controller.selector].scoreCur = controller.dice;
-    }
-    else {
+    } else {
       controller.players[controller.selector].scoreCur = 0;
     }
   });
-  $("#HOLD").onClick(function(){
+  $("#HOLD").click(function(){
     //set results
     controller.players[controller.selector].scoreSum += controller.players[controller.selector].scoreCur;
     //test for win
@@ -60,11 +61,12 @@ $(document).ready(function(){
     //if win condition reached
     if (controller.won === true) {
       $("#WINNING").text(controller.players[selector].name+" has won!!!")
-    }
-    else {
+    } else {
       //move to next player
       controller.selector+=1;
-      if (controller.selector => controller.players.length){controller.selector=0;}
+      if (controller.selector >= controller.players.length) {
+        controller.selector=0;
+      }
     }
   });
 });
