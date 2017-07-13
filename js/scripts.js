@@ -37,7 +37,7 @@ $(document).ready(function(){
   //computer rolls for starting player
   console.log('test');
   $("form#GAME_START").submit(function(event){
-    var gameController = new Controller (parseInt($("input#Players")));
+    var gameController = new Controller(parseInt($("input#Players")));
     gameController.setPlayers();
 
     event.preventDefault();
